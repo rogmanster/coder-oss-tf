@@ -11,6 +11,10 @@ variable "coder_version" {
   default = "0.13.6"
 }
 
+variable "coder_access_url" {
+  default = "https://coder.example.com"
+}
+
 # Change this password away from the default if you are doing
 # anything more than a testing stack.
 variable "db_password" {
@@ -173,6 +177,9 @@ coder:
       value: "postgres://coder:${var.db_password}@${helm_release.pg_cluster.name}.coder.svc.cluster.local:5432/coder?sslmode=disable"
     - name: CODER_EXPERIMENTAL
       value: "true"
+    - name: CODER_ACCESS_URL
+      value: "${var.coder_access_url}"
+
     EOT
   ]
 
